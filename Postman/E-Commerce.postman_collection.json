@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "304289f0-3745-440c-8c59-655b0cf4aa60",
+		"name": "E-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();\r",
+									"pm.environment.set('Token', res.obj.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3310/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3310",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"kitsada\",\r\n    \"last_name\": \"phoson\",\r\n    \"email\": \"\",\r\n    \"phone\": \"\",\r\n    \"password\": \"\",\r\n    \"password_confirm\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3310/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3310",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User management",
+			"item": [
+				{
+					"name": "Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}profile",
+							"host": [
+								"{{url}}profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Histories",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Management",
+			"item": [
+				{
+					"name": "Product All.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}product?page=1&skip=0&limit=10&search=",
+							"host": [
+								"{{url}}product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3302/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3302",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\": \"\",\r\n    \"product_price\": 0,\r\n    \"product_desc\": \"\",\r\n    \"product_count\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3302/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3302",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\": \"\",\r\n    \"product_price\": 0,\r\n    \"product_desc\": \"\",\r\n    \"product_count\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3302/product/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3302",
+							"path": [
+								"product",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product.",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3302/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3302",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order management",
+			"item": [
+				{
+					"name": "Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"address\": \"\",\r\n    \"sub_district\": \"\",\r\n    \"district\": \"\",\r\n    \"province\": \"\",\r\n    \"zip_code\": \"\",\r\n    \"contact\": \"\",\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"order_details\": \"\",\r\n            \"amount\": 0\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3303/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3303",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3303/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3303",
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3303/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3303",
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
